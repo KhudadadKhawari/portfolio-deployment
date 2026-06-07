@@ -1,0 +1,21 @@
+name: Deployment Validation
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare env file
+        run: cp .env.example .env
+      - name: Validate Docker Compose
+        run: docker compose --env-file .env -f docker-compose.prod.yml config
+      - name: ShellCheck scripts
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: ./scripts
