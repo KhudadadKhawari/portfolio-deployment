@@ -33,4 +33,4 @@ ufw allow 80/tcp
 ufw allow 443/tcp
 ufw --force enable
 
-echo "Docker and firewall are ready. Copy portfolio-deployment into ${APP_DIR}, create ${APP_DIR}/.env, then run scripts/init-ssl.sh."
+echo "Docker and firewall are ready. Copy portfolio-deployment into ${APP_DIR}, create ${APP_DIR}/.env, then run scripts/setup-letsencrypt.sh."

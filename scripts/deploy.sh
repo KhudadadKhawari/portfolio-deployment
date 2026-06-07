@@ -32,11 +32,11 @@ if [[ -n ${DOCKERHUB_USERNAME:-} && -n ${DOCKERHUB_TOKEN:-} ]]; then
   echo "${DOCKERHUB_TOKEN}" | docker login docker.io -u "${DOCKERHUB_USERNAME}" --password-stdin
 fi
 
-if [[ ${SERVICE} == "backend" ]]; then
-  sed -i "s#^BACKEND_IMAGE=.*#BACKEND_IMAGE=${IMAGE_TAG}#" "${ENV_FILE}"
-else
-  sed -i "s#^FRONTEND_IMAGE=.*#FRONTEND_IMAGE=${IMAGE_TAG}#" "${ENV_FILE}"
-fi
+# if [[ ${SERVICE} == "backend" ]]; then
+#   sed -i "s#^BACKEND_IMAGE=.*#BACKEND_IMAGE=${IMAGE_TAG}#" "${ENV_FILE}"
+# else
+#   sed -i "s#^FRONTEND_IMAGE=.*#FRONTEND_IMAGE=${IMAGE_TAG}#" "${ENV_FILE}"
+# fi
 
 docker compose --env-file "${ENV_FILE}" -f "${COMPOSE_FILE}" pull "${SERVICE}"
 

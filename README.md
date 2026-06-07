@@ -20,11 +20,13 @@ sudo DEPLOY_USER=deploy APP_DIR=/opt/portfolio ./scripts/setup-vps.sh
 ```
 
 4. Copy `.env.example` to `.env` and update every secret and domain value.
-5. Start initial services and issue SSL:
+5. Start the HTTP ACME bootstrap and issue a valid Let's Encrypt certificate for `portfolio.seferyak.com`:
 
 ```bash
-./scripts/init-ssl.sh
+./scripts/setup-letsencrypt.sh
 ```
+
+The script temporarily starts Nginx in HTTP-only mode, verifies that `/.well-known/acme-challenge/` is reachable for `portfolio.seferyak.com`, stores the issued certificate under `./letsencrypt`, restores the HTTPS Nginx config, and recreates Nginx with the real certificate mounted read-only.
 
 6. Start the full stack:
 

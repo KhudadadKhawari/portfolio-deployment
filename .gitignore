@@ -3,4 +3,6 @@
 !.env.example
 logs/
 backups/
+certbot/
+letsencrypt/
 *.log
